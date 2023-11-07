@@ -16,6 +16,8 @@ model Users {
   lastName  String?
   type      Int
   email     String  @unique
+  username String @unique
+  password String
 
   posts Posts[]
   relations Relations[]
