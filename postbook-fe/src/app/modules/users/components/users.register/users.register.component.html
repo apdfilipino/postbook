@@ -1,0 +1,23 @@
+<div class="container">
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="data.username">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="data.password">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput [(ngModel)]="data.firstName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="data.lastName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" [(ngModel)]="data.email">
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="register()">Register</button>
+</div>
