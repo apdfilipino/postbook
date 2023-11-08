@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, NotFoundException } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { UsersService } from '../services/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateFriendsDto } from './dto/create-friends.dto';
@@ -51,6 +51,12 @@ export class UsersController {
     if (!res) {
       throw new NotFoundException("User not found");
     }
-    return { userId: res.userId };
+    return { ...res };
+  }
+
+  @Get(':id/timeline')
+  public async findTimeline(@Param('id') id: string) {
+    const res = await this.usersService.findTimeline(+id);
+    return [ ...res ];
   }
 }
