@@ -1,1 +1,3 @@
-<p>posts.list works!</p>
+<div class="post-list" *ngFor="let p of posts">
+    <app-posts-details [post]="p"></app-posts-details>
+</div>

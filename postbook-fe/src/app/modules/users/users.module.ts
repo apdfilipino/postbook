@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,12 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PostsModule } from '../posts/posts.module';
 
 export const userRoutes: Routes = [
   { path: USERS.REGISTER_ROUTE, component: UsersRegisterComponent },
   { path: USERS.DETAILS_ROUTE, component: UsersDetailsComponent },
   { path: USERS.LOGIN_ROUTE, component: UsersLoginComponent },
-  { path: '**', pathMatch: 'full', redirectTo: USERS.DETAILS_ROUTE }
+  { path: '**', pathMatch: 'full', redirectTo: USERS.LOGIN_ROUTE }
 ];
 
 @NgModule({
@@ -37,7 +38,10 @@ export const userRoutes: Routes = [
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    PostsModule,
+    NgFor,
+    NgIf
   ],
   exports: [
     UsersListComponent,

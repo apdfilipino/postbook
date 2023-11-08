@@ -9,6 +9,7 @@ export const EXTERNAL = {
         BASE_URL: 'http://localhost:3000/users',
         POST_REGISTER: 'register',
         POST_LOGIN: 'login',
-        GET_USERS_DETAILS: ':id'
+        GET_USERS_DETAILS: ':id',
+        GET_USERS_TIMELINE: ':id/timeline'
     }
 }

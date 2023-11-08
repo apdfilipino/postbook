@@ -19,8 +19,9 @@ model Users {
   username String @unique
   password String
 
-  posts Posts[]
+  posts Posts[] @relation("PostingUser")
   relations Relations[]
+  timeline Posts[] @relation("Timeline")
 }
 
 model Posts {
@@ -28,8 +29,10 @@ model Posts {
   userId   Int
   parentId Int? @unique
   text String
+  posterId Int
 
-  user Users @relation(fields: [userId], references: [userId])
+  poster Users @relation("PostingUser", fields: [posterId], references: [userId])
+  user Users @relation("Timeline", fields: [userId], references: [userId])
   parent Posts? @relation("PostHistory", fields: [parentId], references: [postId], onDelete: Cascade)
   children Posts[] @relation("PostHistory")
 }

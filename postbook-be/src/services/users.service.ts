@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UpdateUserDto } from '../users/dto/update-user.dto';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
-import { CreateFriendsDto } from './dto/create-friends.dto';
-import { UserTypeEnum } from './entities/user.type.enum';
-import { LoginUserDto } from './dto/login-user.dto';
+import { CreateFriendsDto } from '../users/dto/create-friends.dto';
+import { UserTypeEnum } from '../users/entities/user.type.enum';
+import { LoginUserDto } from '../users/dto/login-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -108,9 +108,54 @@ export class UsersService {
         }
       },
       select: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        username: true,
         userId: true
       }
     })
     return user;
+  }
+
+  public async findTimeline(id: number) {
+    const { timeline } = await this.prismaService.users.findFirst({
+      where: {
+        userId: id
+      },
+      select: {
+        timeline: {
+          select: {
+            postId: true,
+            parentId: true,
+            text: true,
+            poster: {
+              select: {
+                userId: true,
+                email: true,
+                firstName: true,
+                lastName: true
+              }
+            },
+            children: {
+              select: {
+                postId: true,
+                parentId: true,
+                text: true,
+                poster: {
+                  select: {
+                    userId: true,
+                    email: true,
+                    firstName: true,
+                    lastName: true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    })
+    return timeline;
   }
 }

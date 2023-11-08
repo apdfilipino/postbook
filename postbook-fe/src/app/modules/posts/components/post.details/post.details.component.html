@@ -1,0 +1,28 @@
+<div class="post-card" *ngIf="post.postId !== -1">
+    <br>
+    <mat-card>
+        <mat-card-header>
+        <mat-card-title>{{ post.poster.firstName }} {{ post.poster.lastName }}</mat-card-title>
+        <mat-card-subtitle>{{ post.poster.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <br>
+            <p>
+                {{ post.text }}
+            </p>
+            <br>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button *ngIf="hasReplies" (click)="toggleReplies()">Show Replies</button>
+        <button mat-button (click)="toggleCreateReply()">{{ createReply === true ? "Cancel" : "Reply" }}</button>
+        <button mat-button>Delete</button>
+        </mat-card-actions>
+    </mat-card>
+    <div *ngIf="createReply">
+        <app-posts-create [parentId] = "post.postId" (onSuccessReply)="onSuccessReply($event)"></app-posts-create>
+    </div>
+    <div class="post-card" *ngIf="showReplies" >
+        <app-posts-list *ngIf="post.children !== undefined" [posts]="post.children"></app-posts-list>
+    </div>
+</div>
+    

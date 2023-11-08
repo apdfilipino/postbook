@@ -1,1 +1,8 @@
-<p>posts.create works!</p>
+<div>
+    <br>
+    <mat-form-field class="post-reply">
+        <mat-label>Textarea</mat-label>
+        <textarea #textbox matInput style="resize: none;" (change)="data.text = textbox.value"></textarea>
+    </mat-form-field>
+    <button class="post-reply-button" mat-raised-button color="accent" (click)="reply()">Reply</button>
+</div>

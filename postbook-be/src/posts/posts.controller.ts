@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
-import { PostsService } from './posts.service';
+import { PostsService } from '../services/posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
@@ -35,4 +35,5 @@ export class PostsController {
   public async remove(@Param('id') id: string) {
     return this.postsService.remove(+id);
   }
+
 }
